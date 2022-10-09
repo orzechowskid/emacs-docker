@@ -1,0 +1,2 @@
+to build: ./build.sh
+to run: ./emacs
