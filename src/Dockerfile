@@ -39,7 +39,6 @@ RUN apt install -y \
     software-properties-common \
     texinfo
 
-COPY emacs ./emacs
 COPY build-emacs.sh ./build-emacs.sh
 RUN ./build-emacs.sh
 
