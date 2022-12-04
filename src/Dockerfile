@@ -4,8 +4,8 @@ ARG UID
 ARG GID
 ARG USER
 
-RUN groupadd -g $GID dockerusers
-RUN useradd -u $UID -g $GID $USER -d /home/$USER
+RUN groupadd -f -g $GID dockerusers
+RUN id -ur $UID > /dev/null || useradd -u $UID -g $GID $USER -d /home/$USER
 RUN apt-get update
 RUN apt install -y \
     apt-transport-https \
@@ -35,17 +35,27 @@ RUN apt install -y \
     libtree-sitter-dev \
     libxpm-dev \
     libxt-dev \
-    nodejs \
-    npm \
     pkg-config \
     software-properties-common \
     texinfo
 
-COPY build-ts-modules.sh ./build-ts-modules.sh
-RUN ./build-ts-modules.sh
-
 COPY emacs ./emacs
 COPY build-emacs.sh ./build-emacs.sh
 RUN ./build-emacs.sh
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
+RUN apt-get install -y \
+    nodejs
+
+run npm install -g \
+    eslint \
+    typescript \
+    @typescript-eslint/eslint-plugin \
+    @typescript-eslint/parser \
+    typescript-eslint-language-service \
+    typescript-language-server
+
+COPY build-ts-modules.sh ./build-ts-modules.sh
+RUN ./build-ts-modules.sh
 
 CMD sh -c "cd $HOME && emacs /home/dan/test.tsx"
