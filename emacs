@@ -1,7 +1,11 @@
 #!/bin/sh
 
+if [ $TERM ]; then
+	ARGS="-it"
+fi
+
 docker run \
-       -it \
+       $ARGS \
        -e DISPLAY \
        -e HOME \
        -e PATH \

@@ -57,4 +57,4 @@ run npm install -g \
 COPY build-ts-modules.sh ./build-ts-modules.sh
 RUN ./build-ts-modules.sh
 
-CMD sh -c "cd $HOME && emacs"
+CMD sh -c "cd $HOME && /usr/local/bin/emacs"
