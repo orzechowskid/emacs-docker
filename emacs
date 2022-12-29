@@ -4,7 +4,9 @@ docker run \
        -it \
        -e DISPLAY \
        -e HOME \
-       -v /tmp/.X11-unix:/tmp/.X11-unix \
-       -v $PWD/home:$HOME \
+       -e PATH \
+       -v /tmp:/tmp \
+       -v /opt:/opt \
+       -v $HOME:$HOME \
        --user="$(id -u):$(id --group)" \
        ubuntu:emacs
