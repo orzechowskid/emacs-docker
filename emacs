@@ -9,6 +9,7 @@ docker run \
        -e DISPLAY \
        -e HOME \
        -e PATH \
+       -e SHELL \
        -v /tmp:/tmp \
        -v /opt:/opt \
        -v $HOME:$HOME \
