@@ -14,4 +14,5 @@ docker run \
        -v /opt:/opt \
        -v $HOME:$HOME \
        --user="$(id -u):$(id --group)" \
-       ubuntu:emacs
+       ubuntu:emacs \
+       $@

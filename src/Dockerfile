@@ -4,6 +4,8 @@ ARG UID
 ARG GID
 ARG USER
 
+COPY ./entrypoint.sh ./entrypoint.sh
+
 RUN groupadd -f -g $GID dockerusers
 RUN id -ur $UID > /dev/null || useradd -u $UID -g $GID $USER -d /home/$USER
 RUN apt-get update
@@ -46,15 +48,7 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
 RUN apt-get install -y \
     nodejs
 
-run npm install -g \
-    eslint \
-    typescript \
-    @typescript-eslint/eslint-plugin \
-    @typescript-eslint/parser \
-    typescript-eslint-language-service \
-    typescript-language-server
-
 COPY build-ts-modules.sh ./build-ts-modules.sh
 RUN ./build-ts-modules.sh
 
-CMD sh -c "cd $HOME && /usr/local/bin/emacs"
+ENTRYPOINT [ "/entrypoint.sh" ]
