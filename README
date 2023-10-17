@@ -1,2 +1,4 @@
+# no longer needed or maintained, but kept around in case it's useful
+
 to build: ./build.sh
 to run: ./emacs
